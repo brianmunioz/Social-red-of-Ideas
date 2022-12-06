@@ -1,0 +1,32 @@
+.upvote{
+    background-image: url('./img/upvote.png');
+    background-size: cover;
+    background-color: transparent;
+    border: none;
+    height: 30px;
+    width: 30px;
+}
+.downvote{
+    background-image: url('./img/downvote.png');
+    background-size: cover;
+    background-color: transparent;
+    border: none;
+    height: 30px;
+    width: 30px;
+}
+.votedup{
+    background-image: url('./img/votedup.png');
+    background-size: cover;
+    background-color: transparent;
+    border: none;
+    height: 30px;
+    width: 30px;
+}
+.voteddown{
+    background-image: url('./img/voteddown.png');
+    background-size: cover;
+    background-color: transparent;
+    border: none;
+    height: 30px;
+    width: 30px;
+}

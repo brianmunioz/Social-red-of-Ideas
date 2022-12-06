@@ -1,0 +1,9 @@
+.backgroundAlertSession {
+        background-color: #FFDEE9;
+        background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%)
+}
+
+.backgroundAlertDelete {
+        background-color: #FF9A8B;
+        background-image: linear-gradient(284deg, #FF9A8B 0%, #ea3156 55%, #ea294e 100%);
+}
