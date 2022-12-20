@@ -16,7 +16,7 @@ const SectionBtn = (props) => {
 
                 <SessionAlert
                     show={modalShow}
-                    title='You need have a account with relize this action!'  
+                    title='You need have a account with realize this action!'  
                     onHide={() => setModalShow(false)}
                 />
 

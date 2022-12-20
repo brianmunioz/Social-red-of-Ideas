@@ -171,7 +171,7 @@ const Idea = ({ data }) => {
         bg={'transparent'}
         key={idea.id}
         text={'dark'}
-        className=" mt-5 shadow"
+        className=" mt-5 mx-auto col-12 col-sm-10 shadow"
       >
         <Card.Header className='fw-bold'>{idea.title}</Card.Header>
         <Card.Body>
