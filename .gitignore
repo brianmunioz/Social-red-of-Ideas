@@ -1,0 +1,13 @@
+**/.vscode/
+!/.vscode/
+/.vscode/*
+!/.vscode/launch.json
+**/.vscode/
+!/.vscode/
+!/.vscode/launch.json
+**/.vscode/
+!/.vscode/launch.json
+**/.vscode/*
+!/.vscode/launch.json
+**/.vscode/
+/.vscode/!launch.json
