@@ -64,7 +64,6 @@ const MyAccount = () => {
             })
             .catch(console.log)
     }, [userData !== '']);
-    console.log(userStats);
     const userType = () => {
         if (userStats.ideasTotal === 0 &&
             userStats.ideasKarma === 0 &&

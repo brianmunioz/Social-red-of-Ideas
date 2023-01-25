@@ -3,5 +3,6 @@ module.exports = {
     errorMiddleWare: require('./error.middleware'),
     AuthMiddleWare: require('./auth.middleware'),
     parseIntMiddleWare: require('./parse-int.middleware'),
-    cacheMiddleWare: require('./cache.middleware')
+    cacheMiddleWare: require('./cache.middleware'),
+    uploadImgMiddleWare: require('./uploadProfileImg.middleware')
 }

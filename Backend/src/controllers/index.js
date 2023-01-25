@@ -3,5 +3,7 @@ module.exports = {
     IdeaController: require('./idea.controller'),
     CommentController: require('./comment.controller'),
     AuthController: require('./auth.controller'),
-    VoteController: require('./vote.controller')
+    VoteController: require('./vote.controller'),
+    SendFile: require('./uploadResponse.controller')
+
 }

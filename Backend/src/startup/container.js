@@ -4,7 +4,7 @@ const { createContainer, asClass, asFunction, asValue } = require('awilix');
 const config = require('../config');
 const server = require('./index');
 //Routes
-const {  VoteRoutes,CommentRoutes, IdeaRoutes, UserRoutes, AuthRoutes } = require('../routes/index.routes');
+const { UploadRoutes, VoteRoutes,CommentRoutes, IdeaRoutes, UserRoutes, AuthRoutes } = require('../routes/index.routes');
 const Routes = require('../routes');
 //models
 const { Vote,Comment, Idea, User } = require('../models');
@@ -13,7 +13,7 @@ const { VoteRepository,CommentRepository, IdeaRepository, UserRepository } = req
 //services
 const { VoteService,AuthService, CommentService, IdeaService, UserService } = require("../services");
 //controllers
-const {VoteController, AuthController, CommentController, IdeaController, UserController } = require('../controllers')
+const { VoteController, AuthController, CommentController, IdeaController, UserController } = require('../controllers')
 
 const container = createContainer();
 container
@@ -23,8 +23,6 @@ container
         UserService: asClass(UserService).singleton(),
         AuthService: asClass(AuthService).singleton(),
         VoteService: asClass(VoteService).singleton()
-
-
     })
     .register({
         server: asClass(server).singleton(),
@@ -37,17 +35,14 @@ container
         IdeaController: asClass(IdeaController.bind(IdeaController)).singleton(),
         UserController: asClass(UserController.bind(UserController)).singleton(),
         AuthController: asClass(AuthController).singleton()
-
-
-
     })
     .register({
         CommentRoutes: asFunction(CommentRoutes).singleton(),
         VoteRoutes: asFunction(VoteRoutes).singleton(),
-
         IdeaRoutes: asFunction(IdeaRoutes).singleton(),
         UserRoutes: asFunction(UserRoutes).singleton(),
-        AuthRoutes: asFunction(AuthRoutes).singleton()
+        AuthRoutes: asFunction(AuthRoutes).singleton(),
+        UploadRoutes: asFunction(UploadRoutes).singleton()
 
     })
     .register({

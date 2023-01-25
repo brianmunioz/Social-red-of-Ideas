@@ -11,19 +11,22 @@ const Config = () => {
   const [nameClick, setNameClick] = useState(false);
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
+  const [image, setImage] = useState('');
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
-  const {REACT_APP_API_URL} = process.env;
+  const [imageUpload, setImageUpload] = useState('');
+  const { REACT_APP_API_URL } = process.env;
 
   useEffect(() => {
     if (!token || !user) logout();
-
   }, [])
   useEffect(() => {
     axios.get(`${REACT_APP_API_URL}user/${user}`)
       .then((response) => {
+
         setName(response.data.name);
         setUsername(response.data.username);
+        setImage(response.data.img_profile);
       })
       .catch(console.log)
   }, [])
@@ -58,20 +61,40 @@ const Config = () => {
         }
         setError(true);
         setErrorMsg('Could not delete account, please try again later');
-
       }
 
       )
   }
+  const handleImage = (e) => {
+    setImageUpload(e.target.files[0])
+  }
+
   const editUser = (e) => {
     e.preventDefault();
+ 
     if (name.trim() === '' || username.trim() === '') {
       setError(true);
       setErrorMsg('You should complete all field´s');
     } else {
+      console.log(imageUpload);
+      if (imageUpload !== undefined) {
+        let formdata = new FormData();
+        formdata.append('myFile', imageUpload);
+        axios.post('http://localhost:3001/v1/api/upload/image', formdata)
+          .then((res) => {
+            console.log(res.data );
+              setImageUpload(res.data.filename)
+            
+          })
+          .catch(() => {
+            setImageUpload('')
+          })
+      }
       axios.patch(`${REACT_APP_API_URL}user/${user}`, {
         name: name,
-        username: username
+        username: username,
+        img_profile: imageUpload
+
       }, {
         headers: {
           'Authorization': token
@@ -79,11 +102,12 @@ const Config = () => {
       })
         .then(
           (res) => {
-            if (res.data.status === 200 && res.data.status === 201) {
+            console.log(res);
+            if (res.status === 200 && res.status === 201) {
               setError(false);
             } else {
               setError(true);
-              setErrorMsg('Could not delete account, please try again later')
+              setErrorMsg('Could not edit this account, please try again later')
             }
           }
         )
@@ -93,15 +117,26 @@ const Config = () => {
               logout();
             }
             setError(true);
-            setErrorMsg('Could not delete account, please try again later');
+            setErrorMsg('Could not edit account, please try again later');
           }
         )
     }
   }
   return (
     <div className=' d-flex flex-column align-items-center  justify-content-center '>
-      <Form className='form-config rounded shadow mt-5' onSubmit={editUser}>
+      <Form className='form-config rounded shadow mt-5 border-0' onSubmit={editUser}>
+
+        <InputGroup className=' d-flex flex-column align-items-center justify-content-between mb-5' >
+        <label className='fw-bold'  htmlFor="image">Profile image</label>
+
+        {image ? <img src={REACT_APP_API_URL +'images/'+ image} alt={username}  class="rounded-circle mb-3 mt-3"style={{width: '80px',height: '80px'}}></img>:
+         <img src={'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'} class="rounded-circle mb-3 mt-3" alt={username} style={{width: '80px',height: '80px'}}></img>}
+
+          <input type="file"  name="image" accept="image/png, .jpeg, .jpg" onChange={handleImage}></input>
+        </InputGroup>
+
         <InputGroup className=' d-flex align-items-center justify-content-between mb-5' >
+
           <label className='fw-bold' htmlFor="cantidad">Nombre</label>
           {
             nameClick === false ? <input className='bg-dark text-light p-1 shadow border-0 rounded' type="text" name="cantidad" id="cantidad" readonly="readonly" value={name} />
