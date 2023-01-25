@@ -76,8 +76,9 @@ const Config = () => {
       setError(true);
       setErrorMsg('You should complete all field´s');
     } else {
-      console.log(imageUpload);
-      if (imageUpload !== undefined) {
+      console.log(imageUpload.name);
+      if (imageUpload.name) {
+        console.log('entró en el sistema');
         let formdata = new FormData();
         formdata.append('myFile', imageUpload);
         axios.post('http://localhost:3001/v1/api/upload/image', formdata)
@@ -86,7 +87,8 @@ const Config = () => {
               setImageUpload(res.data.filename)
             
           })
-          .catch(() => {
+          .catch((err) => {
+            console.log(err);
             setImageUpload('')
           })
       }

@@ -6,7 +6,8 @@ const UserSchema = new Schema({
     username: { type: String, required: true },
     password: { type: String, required: true },
     img_profile: {type: String}
-});
+},{versionKey: false,
+    timestamps: true});
 UserSchema.methods.toJSON = function () {
     let user = this.toObject();
     delete user.password;
