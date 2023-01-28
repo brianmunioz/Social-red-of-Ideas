@@ -26,8 +26,14 @@ const Idea = ({ data }) => {
     title: data.idea,
     description: data.description,
     author: data.author.name,
+    username: data.author.username,
+    authorID: data.author._id,
     comments: data.comments.length
   };
+  let date = new Date(data.createdAt);
+  let onlyDate = date.toLocaleDateString('en-US');
+  let dateandHour = date.toLocaleString("es-ES");
+ 
 
   useEffect(() => {
     if (allVotes.length > 0) {
@@ -177,9 +183,11 @@ const Idea = ({ data }) => {
         <Card.Body>
           <Card.Text>
             {idea.description}
+
+            <p className='text-black-50'>-Posted at: <span className='text-muted'>{dateandHour}</span></p>
           </Card.Text>
           <footer className="blockquote-footer">
-            Author: <cite title="Source Title">{idea.author}</cite>
+            <p className='text-black-50'>Author: <Link  to={'/profileUser/'+idea.authorID}className='text-muted' title={idea.author}>@{idea.username}</Link></p> 
           </footer>
 
         </Card.Body>

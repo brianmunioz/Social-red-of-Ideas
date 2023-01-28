@@ -12,6 +12,7 @@ import CreateDeleteForm from './components/idea/CreateDeleteForm';
 import TopIdeas from './views/top/TopIdeas';
 import MyAccount from './views/User/MyAccount';
 import Config from './views/User/Config';
+import UserProfile from './views/userProfile/userProfile';
 function App() {
   return (
     <div className="App background" style={{ height: "100%" }}>
@@ -27,6 +28,9 @@ function App() {
         <Route path="/edit/:ideaID" element={<CreateDeleteForm  mode="edit"  />}></Route>
         <Route path="/create" element={<CreateDeleteForm mode='create' />}></Route>
         <Route path="/top" element={<TopIdeas />}></Route>
+        <Route path="/profileUser" element={<UserProfile/>}></Route>
+        <Route path="/profileUser/:userID" element={<UserProfile/>}></Route>
+
 
         <Route  path='*' element={<NotFound />} />
       </Routes>

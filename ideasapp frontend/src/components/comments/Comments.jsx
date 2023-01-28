@@ -6,9 +6,11 @@ const Comments = (data) => {
   const [othersComments, setOthersComments] = useState(data.data.comments);
   const [userComment, setUserComment] = useState('');
   const token = document.cookie.replace('token=', '');
+  const { REACT_APP_API_URL } = process.env;
+
   function comment(e) {
 e.preventDefault();
-    axios.post('http://localhost:5000/v1/api/comment/' + data.data._id,
+    axios.post(REACT_APP_API_URL+'v1/api/comment/' + data.data._id,
       {
         comment: userComment
       },
@@ -18,14 +20,15 @@ e.preventDefault();
         }
       })
       .then(apiComments => {
-        setOthersComments(apiComments);
+        console.log(apiComments)
+        setOthersComments(apiComments.data.comments);
       })
       .catch(console.log)
   }
   return (
     <div className='pb-3 mt-5'>
       {othersComments && othersComments.map((el) => {
-        return <IndividualComment author={el.author.name} comment={el.comment}></IndividualComment>
+        return <IndividualComment author={el.author.username} comment={el.comment} authorID = {el.author._id}></IndividualComment>
       })}
       {token ?
         <form className='d-flex justify-content-center  mt-5 col-12' onSubmit={comment}>
