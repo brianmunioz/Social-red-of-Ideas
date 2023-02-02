@@ -8,7 +8,7 @@ import logout from '../../helpers/logout';
 const Idea = ({ data }) => {
   const token = document.cookie.replace('token=', '');
   const userLogged = JSON.parse(localStorage.getItem('user'));
-  
+
   const voteScore = () => {
     if (data.vote.length > 0) {
       const positive = data.vote.filter(el => el.vote === true);
@@ -31,9 +31,8 @@ const Idea = ({ data }) => {
     comments: data.comments.length
   };
   let date = new Date(data.createdAt);
-  let onlyDate = date.toLocaleDateString('en-US');
+  //let onlyDate = date.toLocaleDateString('en-US');
   let dateandHour = date.toLocaleString("es-ES");
- 
 
   useEffect(() => {
     if (allVotes.length > 0) {
@@ -187,7 +186,7 @@ const Idea = ({ data }) => {
             <p className='text-black-50'>-Posted at: <span className='text-muted'>{dateandHour}</span></p>
           </Card.Text>
           <footer className="blockquote-footer">
-            <p className='text-black-50'>Author: <Link  to={'/profileUser/'+idea.authorID}className='text-muted' title={idea.author}>@{idea.username}</Link></p> 
+            <p className='text-black-50'>Author: <Link to={'/profileUser/' + idea.authorID} className='text-muted' title={idea.author}>@{idea.username}</Link></p>
           </footer>
 
         </Card.Body>

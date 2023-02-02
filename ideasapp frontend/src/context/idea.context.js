@@ -11,7 +11,6 @@ export function IdeaProvider(props) {
   function getIdeas() {
     axios.get(REACT_APP_API_URL+'idea')
       .then(dat => {
-        console.log(dat)
         setIdeas(dat.data);
       })
       .catch(console.log)
