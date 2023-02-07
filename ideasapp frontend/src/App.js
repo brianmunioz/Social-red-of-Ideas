@@ -13,6 +13,7 @@ import TopIdeas from './views/top/TopIdeas';
 import MyAccount from './views/User/MyAccount';
 import Config from './views/User/Config';
 import UserProfile from './views/userProfile/userProfile';
+import Searcher from './components/searcher/Searcher';
 function App() {
   return (
     <div className="App background" style={{ height: "100%" }}>
@@ -30,6 +31,7 @@ function App() {
         <Route path="/top" element={<TopIdeas />}></Route>
         <Route path="/profileUser" element={<UserProfile/>}></Route>
         <Route path="/profileUser/:userID" element={<UserProfile/>}></Route>
+        <Route path="/search" element={<Searcher/>}></Route>
 
 
         <Route  path='*' element={<NotFound />} />

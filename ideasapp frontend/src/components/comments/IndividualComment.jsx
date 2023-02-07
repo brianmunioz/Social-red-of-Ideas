@@ -13,7 +13,7 @@ const IndividualComment = (props) => {
                                 height: '30px',
                                 borderRadius: '40px',
                                 marginRight: '10px'
-                            }}></img>
+                            }} alt={props.authorIMG}></img>
                         :
                         <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" style={
                             {
@@ -21,7 +21,7 @@ const IndividualComment = (props) => {
                                 height: '30px',
                                 borderRadius: '40px',
                                 marginRight: '10px'
-                            }}></img>
+                            }} alt={props.authorIMG}></img>
                     }@{props.author}</Link>
                 <p>{props.comment}</p>
             </div>

@@ -10,7 +10,8 @@ const Comments = (data) => {
   let img_profile = '';
 
   function comment(e) {
-    e.preventDefault();
+
+   e.preventDefault();
     axios.post(REACT_APP_API_URL + 'v1/api/comment/' + data.data._id,
       {
         comment: userComment
@@ -32,24 +33,20 @@ const Comments = (data) => {
       })}
       {token ?
         <form className='d-flex justify-content-center  mt-5 col-12' onSubmit={comment}>
-          {img_profile !== '' ?
-            <img src={img_profile} style={
-              {
-                width: '60px',
-                height: '60px',
-                borderRadius: '40px',
-                marginRight: '10px'
-              }}></img>
-            :
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" style={
-              {
-                width: '60px',
-                height: '60px',
-                borderRadius: '40px',
-                marginRight: '10px'
-              }}></img>
+          {img_profile !== '' ? 
+          <img  src={img_profile}  style={
+    {width: '60px',
+    height: '60px',
+    borderRadius: '40px',
+    marginRight: '10px'}} alt={data.name}></img>
+          : 
+          <img  src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"  style={
+    {width: '60px',
+    height: '60px',
+    borderRadius: '40px',
+    marginRight: '10px'}} alt={data.name}></img>
           }
-
+     
           <textarea name="comment" id="comment" placeholder='Write your comment...' className='col-9 me-2 p-1 rounded-3 border border-primary border-2 ' style={
             {
               'max-height': '60px'
@@ -58,19 +55,18 @@ const Comments = (data) => {
             value={userComment}
             onChange={(e) => { setUserComment(e.target.value) }}
           ></textarea>
-
+          
           <input type="submit" className='btn btn-primary' value={'comment'} />
         </form>
         :
         <form className='d-flex justify-content-center  mt-5 col-12'>
-          <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" style={
-            {
-              width: '60px',
-              height: '60px',
-              borderRadius: '40px',
-              marginRight: '10px'
-            }}
-          />
+<img  src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" style={
+    {width: '60px',
+    height: '60px',
+    borderRadius: '40px',
+    marginRight: '10px'}}
+    alt={data.name}
+/>
           <textarea placeholder='Write your comment...' className='col-6 me-2 p-1 rounded-3 border border-primary border-2 ' style={
             {
               'max-height': '60px'
