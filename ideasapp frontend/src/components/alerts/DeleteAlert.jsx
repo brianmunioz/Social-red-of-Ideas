@@ -10,6 +10,7 @@ const DeleteAlert = (props) => {
   const [title, setTitle] = useState('Are you sure you want to delete the idea?');
   const [deleted, setDeleted] = useState(false);
   const navigate = useNavigate();
+  const {REACT_APP_API_URL} = process.env;
 
   if (loading === true && deleted === true) {
 
@@ -27,7 +28,7 @@ const DeleteAlert = (props) => {
   }
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/v1/api/idea/${props.ideaID}`)
+    axios.get(`${REACT_APP_API_URL}/idea/${props.ideaID}`)
       .then((dat) => {
         const userLocalStorage = localStorage.getItem('user').replace(/[ '"]+/g, '').trim();
         if (dat.data.author._id !== userLocalStorage) {
@@ -43,7 +44,7 @@ const DeleteAlert = (props) => {
   const deleteIdea = () => {
 
     const token = document.cookie.replace('token=', '');
-    axios.delete('http://localhost:5000/v1/api/idea/' + props.ideaID,
+    axios.delete(REACT_APP_API_URL+'/idea/' + props.ideaID,
       {
         headers: {
           'Authorization': token

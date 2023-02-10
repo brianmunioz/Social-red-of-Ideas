@@ -46,7 +46,7 @@ const UserProfile = () => {
 
   return (
     <Card style={{ maxWidth: '240px', minWidth: '200px', margin: '0 auto' }} className="mt-5">
-      {data.img_profile !== '' ? <Card.Img variant="top" src={data.img_profile} alt={data.name} />
+      {data.img_profile ? <Card.Img variant="top" src={data.img_profile} alt={data.name} />
         : <Card.Img variant="top" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" alt={data.name}/>
       }
       <Card.Body>

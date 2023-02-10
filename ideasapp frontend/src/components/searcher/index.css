@@ -1,0 +1,8 @@
+.checkGrey{
+    background: #4e4a59;
+    padding: 8px 20px;
+}
+.checkSelected{
+    background: #d5d7db;
+    padding: 8px 20px;
+}

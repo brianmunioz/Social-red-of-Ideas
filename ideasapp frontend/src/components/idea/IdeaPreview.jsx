@@ -4,13 +4,13 @@ import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function IdeaPreview({ id, idea, description, maxChar }) {
-  const ideaCut = idea.substring(0, maxChar);
+  const ideaCut = idea.substring(0, 500);
   const descriptionCut = description.substring(0, maxChar);
 
   return (
-    <Card className='bg-transparent'>
+    <Card className='bg-transparent mb-2'>
       <Card.Header>{ideaCut}
-        {ideaCut.length < description.length && '...'}</Card.Header>
+        {ideaCut.length < idea.length && '...'}</Card.Header>
       <Card.Body>
         <blockquote className="blockquote mb-0">
           <p>

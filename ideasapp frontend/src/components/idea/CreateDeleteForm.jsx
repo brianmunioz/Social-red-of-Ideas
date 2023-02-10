@@ -101,7 +101,7 @@ const createDeleteForm = ({ mode }) => {
 
 
         <Form.Group className="mb-3" >
-          <Form.Label>Titulo de la idea</Form.Label>
+          <Form.Label>Title with idea</Form.Label>
           <Form.Control type="text" name="idea" value={idea} onChange={(e) => setIdea(e.target.value)} />
 
         </Form.Group>
