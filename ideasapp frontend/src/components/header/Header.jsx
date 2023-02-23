@@ -34,7 +34,13 @@ function Header() {
 
         <Navbar.Collapse id="navbarNav">
           <Nav className="me-auto align-items-center">
-            <Link to="/top" className=' nav-link'>Top´s</Link>
+          <Link to="/search" className=' nav-link'>  <img alt='search' src="https://cdn-icons-png.flaticon.com/512/8042/8042338.png" style={{ width: '25px', color: 'white', borderRight: '24px' }} />
+                  &nbsp;Search</Link>
+          </Nav>
+          <Nav className="me-auto align-items-center">
+          <Link to="/top" className=' nav-link'> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEMUlEQVR4nO2ZXWgUVxTHT2PbF7ElraDZLBGhIKybbFAfBUNNK60PIiWYzEptSuiLoogfbGaloRQTlD4JhZZQmkVEjEZBnbmb3ZhAE41JNzGZySZ+RFAQ8iAmiD4EduYeubOTMLOzrZnNzCSBHPjDsjP37v83994z594FWI3VWA3HAwlsU0W4phCYYWKf2XewHANF8GcIVGUIVGdE+FolEFMIqCoBNEr/Lsbu0e4lUMXaLp3xm7BeJXBDEYHmml2olGzb65iEz7013w5rFAJ9hRrPMzq9rE/PAJQ4HMlrpguQ9gOqDwCpDEjHAZFpFJAOA9K72Xv+A+KwJ+YxAT6FwLTJQA+gykw+0vVQ1wQgMs2BpHUNA6rdFoBp1rd7xpugSBHge4XAS5P5FCB9Akgf2wAYy4r2WyBY1jqGPfChs+ZvwnrLnE8AqrJuvkAAZO3/BVQ786wJJxc2yzaWect+fHLxACgBYgpQjef0L0KHI+ZZrrakyiHdvFMAEiC9Z02xjqwJ9sLJXbD0qfMAOGrNUOy3nQDYYwIYcw+ADloA9iweQIRv5zvt1s27BIBsFJImgL2LBmD1y1yHdMB9APqPaRRiizKPt6HSVJiNeQAwaC4AUYAdhT99ETqMc1Iz5zIAspRqTtlXCwbQankjwFMPAB5YSwznACaXAECEVwUDsJ2UCeDhCptCuBSLeCBnEXfC9oIBtFEg0DY/AoMeAPSann4bOPoi61qBL7JMbikhr7RSguQp5iZXUDGHS1VOE1Ad22Kyow/LhkZyfUNzDZwKtr1j2zxPt5Rx+MwxAFc29bKHm/r3HqvcAVRHFg5AU3ob4uGxyoIOtpL6Ux3Jc7A1pB9sGfK8apB0efOv4FWwY8DJjs1TeSEKUH8siJsOiq2eAQQbpQ27fu6bTV6sxgwpKth4hnyAt/7YiYH6DiwJJ2bLwqTEE4BQJN0S4tNYwadx9y89WH/ub2w434oNv7Xijdi+vFDM7JXfq7H25Fk8cKIZvzt+Hrc1XEIf14k+LoG+sKZm181vOTWxriKSnpkDYCrnxzQFo1nVtLRj58WvcObWJ5pI25f4zZEL6OdELOWIrrgmEwCXfF1ck/zUVYCKSPpkqDGN/wcQjMq4VVcgKuOmH7s08+8FCCdxI5c44Zr57T+lPqpoHH9uB2DLqaE3/jrBDsCLQE37x64AhPiJH0KN42gH4Iuj9y/YAShhEOHkIXcAIulRWwC8NLXh4Mhaf63wzCbAqCsAlZHxATsAAV5qYu38tcJpOwAlXFc/eBlBXtpfzsvUDCDNsvcFu17G3S721wlvzQCE+rj4AVguUc7LLUaAQFT+y3jdzwl/GgF8dXH3c76taMKirbwszI/AGTlkvFwWFgN+TqBZADEBNe3e/Su50CiPSMVBXh4ORqXL+a6X1omXSjkxxaaU9+5gecY7hGF4QgN8A1AAAAAASUVORK5CYII=" alt="top"/>
+</Link>
+         
           </Nav>
 
 
@@ -48,16 +54,14 @@ function Header() {
                 <Link className=' nav-link' to="#" onClick={logout}>
                   Logout
                 </Link>
-                <Link to="/search" className=' nav-link'>  <img alt='search' src="https://cdn-icons-png.flaticon.com/512/8042/8042338.png" style={{ width: '25px', color: 'white', borderRight: '24px' }} />
-                  &nbsp;Search</Link>
+                
               </Nav> :
               <Nav className="align-items-center">
                 <Link className=' nav-link' to="/login">Log In</Link>
                 <Link eventKey={2} className=' nav-link' to="/register">
                   Register!
                 </Link>
-                <Link to="/search" className=' nav-link'>  <img alt='search' src="https://cdn-icons-png.flaticon.com/512/8042/8042338.png" style={{ width: '25px', color: 'white', borderRight: '24px' }} />
-                  &nbsp;Search</Link>
+                
               </Nav>
           }
 

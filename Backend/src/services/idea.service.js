@@ -7,8 +7,8 @@ class IdeaService extends BaseService {
         super(IdeaRepository);
         _ideaRepository = IdeaRepository;
     }
+
     async getUserIdeas(author) {
-        
         if (!author) {
             const error = new error();
             error.status = 400;
@@ -17,7 +17,5 @@ class IdeaService extends BaseService {
         }
         return await _ideaRepository.getUserIdeas(author);
     }
-
-
 }
 module.exports = IdeaService;

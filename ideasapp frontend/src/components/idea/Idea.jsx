@@ -31,8 +31,9 @@ const Idea = ({ data }) => {
     comments: data.comments.length
   };
   let date = new Date(data.createdAt);
-  //let onlyDate = date.toLocaleDateString('en-US');
   let dateandHour = date.toLocaleString("es-ES");
+ 
+
 
   useEffect(() => {
     if (allVotes.length > 0) {

@@ -11,8 +11,11 @@ const Home = () => {
     ideas } = useIdea();
   useEffect(() => {
     getIdeas();
-  }, [])
 
+  }, [])
+if(ideas){
+ ideas.sort((idea, idea2)=>  {  return new Date(idea2.createdAt).getTime() -new Date(idea.createdAt).getTime()})
+}
 
   return (
     <div className='container  pb-5'>

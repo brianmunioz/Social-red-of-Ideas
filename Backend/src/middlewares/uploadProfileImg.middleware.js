@@ -25,7 +25,6 @@ function uploadImage(){
             cb({message:"You not upload image type required"})
         }
     }).single('myFile');
-    console.log('entro al middleware');
     return upload
 }
 

@@ -8,15 +8,17 @@ const createDeleteForm = ({ mode }) => {
   const navigate = useNavigate();
   const [description, setDescription] = useState('');
   const [idea, setIdea] = useState('');
+  const [dateCreated, setDateCreated] = useState('');
+  const [dateUpdated, setDateUpdated] = useState('')
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   let { ideaID } = useParams();
   const token = document.cookie.replace('token=', '');
-  const {REACT_APP_API_URL} = process.env;
+  const { REACT_APP_API_URL } = process.env;
 
   if (mode === 'edit') {
     useEffect(() => {
-      axios.get(REACT_APP_API_URL+'idea/' + ideaID)
+      axios.get(REACT_APP_API_URL + 'idea/' + ideaID)
         .then(dat => {
           if (dat.status !== 200 && dat.status !== 201) {
             document.cookie = "token=; max-age=0";
@@ -25,6 +27,8 @@ const createDeleteForm = ({ mode }) => {
           }
           setIdea(dat.data.idea);
           setDescription(dat.data.description);
+          setDateCreated(dat.data.createdAt)
+          setDateUpdated(dat.data.updatedAt)
         }
         )
         .catch(res => {
@@ -41,9 +45,12 @@ const createDeleteForm = ({ mode }) => {
     } else if (description.trim() === '') {
       setError('You need a complete description field!');
     } else {
-      axios.patch(REACT_APP_API_URL+'idea/' + ideaID, {
+      axios.patch(REACT_APP_API_URL + 'idea/' + ideaID, {
         idea: idea,
-        description: description
+        description: description,
+        dateCreated,
+        dateUpdated,
+        typeUpdate: 'idea'
       }, {
         headers: {
           'Authorization': token
@@ -53,7 +60,7 @@ const createDeleteForm = ({ mode }) => {
           if (dat.status === 200 && dat.status === 201) {
             setSuccess('updated successfully! ')
 
-          } 
+          }
         })
         .catch(res => {
           if (res.response.status === 401) logout();
@@ -70,7 +77,7 @@ const createDeleteForm = ({ mode }) => {
     } else if (description.trim() === '') {
       setError('You need complete description field!');
     } else {
-      axios.post(REACT_APP_API_URL+'idea', {
+      axios.post(REACT_APP_API_URL + 'idea', {
         idea: idea,
         description: description,
       }, {
@@ -82,11 +89,10 @@ const createDeleteForm = ({ mode }) => {
           console.log(dat)
           if (dat.status === 200 && dat.status === 201) {
             setSuccess('Idea created! ');
-           }
+          }
         }
       )
         .catch(res => {
-          console.log(res);
           if (res.response.status === 401) logout();
         })
     }
@@ -108,7 +114,7 @@ const createDeleteForm = ({ mode }) => {
 
         <Form.Group className="mb-3" >
           <Form.Label>Idea description</Form.Label>
-          <Form.Control type="text" name="description" value={description} onChange={(e) => setDescription(e.target.value)} />
+          <Form.Control as="textarea" rows={15} name="description" value={description} onChange={(e) => setDescription(e.target.value)} />
         </Form.Group>
 
         <Button variant="outline-dark" type="submit">

@@ -16,7 +16,7 @@ import UserProfile from './views/userProfile/userProfile';
 import Searcher from './components/searcher/Searcher';
 function App() {
   return (
-    <div className="App background" style={{ height: "100%" }}>
+    <div className="App background pb-5" style={{ height: "100%" }}>
       <Header />
       <Routes>
         <Route path="/" element={<Home />}></Route>

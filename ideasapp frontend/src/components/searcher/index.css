@@ -6,3 +6,6 @@
     background: #d5d7db;
     padding: 8px 20px;
 }
+#author::placeholder{
+    font-size: 14px;
+}

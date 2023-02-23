@@ -1,3 +1,4 @@
+const { latestDate } = require('../helpers')
 class BaseService {
     constructor(repository) {
         this.repository = repository;
@@ -26,16 +27,33 @@ class BaseService {
         return await this.repository.create(entity);
     }
     async update(id, entity) {
+
         if (!id) {
             const error = new Error();
             error.status = 400;
             error.message = 'No valid ID!';
             throw error;
         }
+        if (!entity.typeUpdate) {
+            const error = new Error();
+            error.status = 400;
+            error.message = 'You need to send type of update!';
+            throw error;
+        }
+        const doUpdated = latestDate(new Date(entity.dateUpdated).getTime(), entity.typeUpdate)
+
+        if (!doUpdated) {
+            const error = new Error();
+            error.status = 400;
+            error.message = 'You not do updated!';
+            throw error;
+        }
+
+
         return await this.repository.update(id, entity);
 
     }
-    async delete(idParam,idUser) {
+    async delete(idParam, idUser) {
         if (!idParam) {
             const error = new Error();
             error.status = 400;
@@ -43,15 +61,16 @@ class BaseService {
             throw error;
         }
 
-        if(idUser !== idUser){
+        if (idParam !== idUser) {
             const error = new Error();
             error.status = 400;
             error.message = 'You are not authorized to delete';
             throw error;
         }
-       
+
 
         return await this.repository.delete(idParam);
     }
+
 }
 module.exports = BaseService;
