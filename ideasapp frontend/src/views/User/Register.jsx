@@ -11,7 +11,7 @@ const Register = () => {
   const [name, setName] = useState("");
   const [pass, setPass] = useState("");
   const [error, setError] = useState("");
-  if (token) {
+  if (token !== '') {
     navigate('/');
   }
   const handleSubmit = e => {
@@ -37,7 +37,7 @@ const Register = () => {
       .then(function () {
         navigate('/login');
       })
-      .catch(function () {
+      .catch(function (error) {
         setError('Please try again later');
         setTimeout(() => {
           setError("");
@@ -47,13 +47,12 @@ const Register = () => {
   return (
     <Container>
       <div className="login">
-        <div className="login-triangle " />
-        <h2 className="login-header bg-dark fw-bold">Register</h2>
+        <h2 className="login-header  fw-bold">Register</h2>
         <form className="login-container shadow" onSubmit={handleSubmit}>
           <input className='mb-3' type="text" name="username" value={user} onChange={(e) => setUser(e.target.value)} placeholder="user" />
           <input className='mb-3' type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="name" />
           <input className='mb-3' type="password" name="password" value={pass} onChange={(e) => setPass(e.target.value)} placeholder="Password" />
-          <input type="submit" value="Sign up" className='bg-dark' />
+          <input type="submit" value="Sign up" className='border-0' />
         </form>
         {error && <Alert className='mt-3' variant='danger'>{error}</Alert>}
       </div>

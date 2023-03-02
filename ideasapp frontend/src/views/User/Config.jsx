@@ -3,12 +3,14 @@ import { useEffect } from 'react';
 import { Alert, Button, Form, InputGroup } from 'react-bootstrap'
 import axios from 'axios';
 import logout from '../../helpers/logout';
+import { useNavigate } from 'react-router-dom';
 
 const Config = () => {
   const token = document.cookie.replace('token=', '');
   const user = JSON.parse(localStorage.getItem('user'));
   const [usernameClick, setUsernameClick] = useState(false);
   const [nameClick, setNameClick] = useState(false);
+  const [dateUpdated, setDateUpdated] = useState('');
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [image, setImage] = useState('');
@@ -16,9 +18,12 @@ const Config = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const [imageUpload, setImageUpload] = useState('');
   const { REACT_APP_API_URL } = process.env;
-
+  const navigate = useNavigate();
   useEffect(() => {
-    if (!token || !user) logout();
+    if (!token || !user) {
+      navigate('/');
+      logout();
+    }
   }, [])
   useEffect(() => {
     axios.get(`${REACT_APP_API_URL}user/${user}`)
@@ -27,6 +32,7 @@ const Config = () => {
         setName(response.data.name);
         setUsername(response.data.username);
         setImage(response.data.img_profile);
+        setDateUpdated(response.data.updatedAt)
       })
       .catch(console.log)
   }, [])
@@ -71,31 +77,30 @@ const Config = () => {
 
   const editUser = (e) => {
     e.preventDefault();
- 
+
     if (name.trim() === '' || username.trim() === '') {
       setError(true);
       setErrorMsg('You should complete all field´s');
     } else {
       console.log(imageUpload.name);
       if (imageUpload.name) {
-        console.log('entró en el sistema');
         let formdata = new FormData();
         formdata.append('myFile', imageUpload);
         axios.post('http://localhost:3001/v1/api/upload/image', formdata)
           .then((res) => {
-            console.log(res.data );
-              setImageUpload(res.data.filename)
-            
+            setImageUpload(res.data.filename)
+
           })
           .catch((err) => {
-            console.log(err);
             setImageUpload('')
           })
       }
       axios.patch(`${REACT_APP_API_URL}user/${user}`, {
         name: name,
         username: username,
-        img_profile: imageUpload
+        img_profile: imageUpload,
+        typeUpdate: 'user',
+        dateUpdated
 
       }, {
         headers: {
@@ -115,6 +120,7 @@ const Config = () => {
         )
         .catch(
           (res) => {
+            console.log(res)
             if (res.response.status === 401) {
               logout();
             }
@@ -129,12 +135,12 @@ const Config = () => {
       <Form className='form-config rounded shadow mt-5 border-0' onSubmit={editUser}>
 
         <InputGroup className=' d-flex flex-column align-items-center justify-content-between mb-5' >
-        <label className='fw-bold'  htmlFor="image">Profile image</label>
+          <label className='fw-bold' htmlFor="image">Profile image</label>
 
-        {image ? <img src={REACT_APP_API_URL +'images/'+ image} alt={username}  class="rounded-circle mb-3 mt-3"style={{width: '80px',height: '80px'}}></img>:
-         <img src={'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'} class="rounded-circle mb-3 mt-3" alt={username} style={{width: '80px',height: '80px'}}></img>}
+          {image ? <img src={REACT_APP_API_URL + 'images/' + image} alt={username} class="rounded-circle mb-3 mt-3" style={{ width: '80px', height: '80px' }}></img> :
+            <img src={'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png'} class="rounded-circle mb-3 mt-3" alt={username} style={{ width: '80px', height: '80px' }}></img>}
 
-          <input type="file"  name="image" accept="image/png, .jpeg, .jpg" onChange={handleImage}></input>
+          <input type="file" name="image" accept="image/png, .jpeg, .jpg" onChange={handleImage}></input>
         </InputGroup>
 
         <InputGroup className=' d-flex align-items-center justify-content-between mb-5' >

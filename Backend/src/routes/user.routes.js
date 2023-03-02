@@ -3,8 +3,8 @@ const { AuthMiddleWare, parseIntMiddleWare } = require('../middlewares')
 module.exports = function ({ UserController }) {
     const router = Router();
     router.get("/:userID", UserController.get);
-    router.get("", [AuthMiddleWare, parseIntMiddleWare], UserController.getAll);
+    router.get("", [AuthMiddleWare('user_getAll'), parseIntMiddleWare], UserController.getAll);
     router.patch("/:userID",AuthMiddleWare, UserController.update);
-    router.delete("/:userID",AuthMiddleWare, UserController.delete);
+    router.delete("/:userID",[AuthMiddleWare('user_delete'), parseIntMiddleWare],AuthMiddleWare, UserController.delete);
     return router;
 };

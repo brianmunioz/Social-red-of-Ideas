@@ -5,7 +5,7 @@ module.exports = function ({ CommentController }) {
     router.get("/:commentID/unique", CommentController.get);
     router.get("/:ideaID", CommentController.getIdeasComments);
     router.post('/:ideaId', [AuthMiddleWare, parseIntMiddleWare], CommentController.createComment);
-    router.delete("/:commentID", CommentController.delete);
+    router.delete("/:commentID",[AuthMiddleWare('comment_delete'), parseIntMiddleWare], CommentController.delete);
 
     return router;
 };

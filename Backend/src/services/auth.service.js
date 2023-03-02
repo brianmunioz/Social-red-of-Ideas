@@ -34,7 +34,8 @@ class AuthService {
         }
         const userToEncode = {
             username: userExist.username,
-            id: userExist._id
+            id: userExist._id,
+            rol: userExist.rol
         };
         const token = generateToken(userToEncode);
 

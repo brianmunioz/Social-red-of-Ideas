@@ -1,0 +1,9 @@
+.comments-container{
+    width: 95%;
+}
+@media  screen and (min-width: 550px) {
+
+    .comments-container{
+        width: 80%;
+    }
+}

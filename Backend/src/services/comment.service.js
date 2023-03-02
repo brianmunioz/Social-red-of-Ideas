@@ -36,15 +36,16 @@ class CommentService extends BaseService {
           error.message = "ideaId must be sent";
           throw error;
         }
-        if (comment === '') {
+        if (comment.comment === '') {
           const error = new Error();
           error.status = 400;
           error.message = "comment must be sent";
           throw error;
         }
+       
     
         const idea = await _ideaRepository.get(ideaId);
-    
+          
         if (!idea) {
           const error = new Error();
           error.status = 404;

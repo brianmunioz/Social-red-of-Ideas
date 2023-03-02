@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import IndividualComment from './IndividualComment';
 import axios from 'axios';
+import './style.css';
 import SectionBtn from '../alerts/btnAlerts/SectionBtn';
 const Comments = (data) => {
   const [othersComments, setOthersComments] = useState(data.data.comments);
@@ -8,12 +9,13 @@ const Comments = (data) => {
   const token = document.cookie.replace('token=', '');
   const { REACT_APP_API_URL } = process.env;
   let img_profile = '';
-
   function comment(e) {
     e.preventDefault();
+    
     axios.post(REACT_APP_API_URL + '/comment/' + data.data._id,
       {
-        comment: userComment
+        comment: userComment,
+        rol: data.data.author.rol
       },
       {
         headers: {
@@ -27,7 +29,7 @@ const Comments = (data) => {
       .catch(console.log)
   }
   return (
-    <div className='pb-3 mt-5'>
+    <div className='pb-3 mx-auto comments-container mt-5'>
       {othersComments && othersComments.map((el) => {
         return <IndividualComment author={el.author.username} comment={el.comment} authorID={el.author._id} authorIMG={el.author.img_profile}></IndividualComment>
       })}

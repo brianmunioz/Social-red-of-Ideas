@@ -3,23 +3,27 @@ import './styles.css';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logout from '../../helpers/logout';
 
 export default () => <Header></Header>
 
 
 function Header() {
-  let token = document.cookie.replace('token=', '');
-  const [collapsed, setCollapsed] = useState(true)
-
-
+  const [token, setToken] = useState(document.cookie.replace('token=', ''))
+  const [collapsed, setCollapsed] = useState(true);
+  const [isLogOut, setIsLogOut] = useState(false);
+  const navigate = useNavigate();
+  if (isLogOut) {
+    setIsLogOut(false)
+    navigate('/')
+  }
   return (
     <Navbar collapseOnSelect expand="lg" className='header shadow' variant="dark">
       <Container>
         <Link to="/" className='navbar-brand'><img src="/logo.png" style={{ height: '50px' }} alt="logo" /></Link>
 
-        <button  class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onClick={() => setCollapsed(!collapsed)}>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" onClick={() => setCollapsed(!collapsed)}>
           {collapsed ? (<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
             width="35" height="35"
             viewBox="0 0 48 48">
@@ -33,35 +37,42 @@ function Header() {
         </button>
 
         <Navbar.Collapse id="navbarNav">
+
           <Nav className="me-auto align-items-center">
-          <Link to="/search" className=' nav-link'>  <img alt='search' src="https://cdn-icons-png.flaticon.com/512/8042/8042338.png" style={{ width: '25px', color: 'white', borderRight: '24px' }} />
-                  &nbsp;Search</Link>
-          </Nav>
-          <Nav className="me-auto align-items-center">
-          <Link to="/top" className=' nav-link'> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEMUlEQVR4nO2ZXWgUVxTHT2PbF7ElraDZLBGhIKybbFAfBUNNK60PIiWYzEptSuiLoogfbGaloRQTlD4JhZZQmkVEjEZBnbmb3ZhAE41JNzGZySZ+RFAQ8iAmiD4EduYeubOTMLOzrZnNzCSBHPjDsjP37v83994z594FWI3VWA3HAwlsU0W4phCYYWKf2XewHANF8GcIVGUIVGdE+FolEFMIqCoBNEr/Lsbu0e4lUMXaLp3xm7BeJXBDEYHmml2olGzb65iEz7013w5rFAJ9hRrPMzq9rE/PAJQ4HMlrpguQ9gOqDwCpDEjHAZFpFJAOA9K72Xv+A+KwJ+YxAT6FwLTJQA+gykw+0vVQ1wQgMs2BpHUNA6rdFoBp1rd7xpugSBHge4XAS5P5FCB9Akgf2wAYy4r2WyBY1jqGPfChs+ZvwnrLnE8AqrJuvkAAZO3/BVQ786wJJxc2yzaWect+fHLxACgBYgpQjef0L0KHI+ZZrrakyiHdvFMAEiC9Z02xjqwJ9sLJXbD0qfMAOGrNUOy3nQDYYwIYcw+ADloA9iweQIRv5zvt1s27BIBsFJImgL2LBmD1y1yHdMB9APqPaRRiizKPt6HSVJiNeQAwaC4AUYAdhT99ETqMc1Iz5zIAspRqTtlXCwbQankjwFMPAB5YSwznACaXAECEVwUDsJ2UCeDhCptCuBSLeCBnEXfC9oIBtFEg0DY/AoMeAPSann4bOPoi61qBL7JMbikhr7RSguQp5iZXUDGHS1VOE1Ad22Kyow/LhkZyfUNzDZwKtr1j2zxPt5Rx+MwxAFc29bKHm/r3HqvcAVRHFg5AU3ob4uGxyoIOtpL6Ux3Jc7A1pB9sGfK8apB0efOv4FWwY8DJjs1TeSEKUH8siJsOiq2eAQQbpQ27fu6bTV6sxgwpKth4hnyAt/7YiYH6DiwJJ2bLwqTEE4BQJN0S4tNYwadx9y89WH/ub2w434oNv7Xijdi+vFDM7JXfq7H25Fk8cKIZvzt+Hrc1XEIf14k+LoG+sKZm181vOTWxriKSnpkDYCrnxzQFo1nVtLRj58WvcObWJ5pI25f4zZEL6OdELOWIrrgmEwCXfF1ck/zUVYCKSPpkqDGN/wcQjMq4VVcgKuOmH7s08+8FCCdxI5c44Zr57T+lPqpoHH9uB2DLqaE3/jrBDsCLQE37x64AhPiJH0KN42gH4Iuj9y/YAShhEOHkIXcAIulRWwC8NLXh4Mhaf63wzCbAqCsAlZHxATsAAV5qYu38tcJpOwAlXFc/eBlBXtpfzsvUDCDNsvcFu17G3S721wlvzQCE+rj4AVguUc7LLUaAQFT+y3jdzwl/GgF8dXH3c76taMKirbwszI/AGTlkvFwWFgN+TqBZADEBNe3e/Su50CiPSMVBXh4ORqXL+a6X1omXSjkxxaaU9+5gecY7hGF4QgN8A1AAAAAASUVORK5CYII=" alt="top"/>
-</Link>
-         
+
+            <Link to="/top" className=' nav-link fw-bold'>
+              <img src="data:image/png;base64,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" width="30px" alt="top" />
+              Top´s
+
+            </Link>
+            <Link to="/search" className=' nav-link fw-bold'> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAACGklEQVR4nN3U30tTYRzH8dNF9Se0XRV1FSQ47Y8IxKugcGgXlYEh0g+iSGmiIRGImELpsc2ziqjGugv6XbsLjCRX4mC53xvbmtM2XZ4d3/EcO92enYkUfe8OHHjx+T7P85Gk/35GYbcCHYqGz1Ml6FGJu1Vm5XU8dyq0Aju2BNyDFkUjomzAtAaeKrhVmFqHiZ9wuwLjq3wcKdFYF+CFbq+GZgJwqwwjPygNFzliOYEFgOEVuFlk5UaegzUBj2GXohG2CDBUgIE8b2tC9EOuAxjMgysLfVkc5oiGr24gA1dSuEyR6SpfDMA1X+LEswxjpQ0d6F+scPxpmutpVQeuxVWOPklzbn7NALgU56Ep4lZJGAla5AiHeoP0hsp6gjZ/Rv8+FfiuJzj5ZomGq0FafalNIAHnYzw3Re6qfDJWNJSo0PNhidHS5opEgtOBAgNZTV9RX0qj/VWBC2HVAOhZxGuKiJds8Qz4A0TgbJiLpoioinqBrjDamRAHTBHRRWOrzFhO8A06QyhSrSO6SK8KC0D7bBmH/2u3ZGVEF4mqqBVoeDRH0+tctTlQbLMEiS4azPHC5Ay8Tf6FTsfLnHr4/fLy3gfJz7apSIdkdURVXE7SLx6aeAfimopb1LXAfuOf5ndF5777yTm7HMM+Ga3a5ZhT2o7ZMxk9ZpejqgHVleifguxyzPl7ZdjkqHmXbQWyCWBiZue2IX9tfgEFQW3Q922jOQAAAABJRU5ErkJggg==" width="25px" alt="search" />
+              &nbsp;Search</Link>
+
           </Nav>
 
 
           {
-            token ?
+            token && token !== '' ?
 
               <Nav className="align-items-center">
                 <Link className=' nav-link' to="/myideas">My ideas</Link>
                 <Link className=' nav-link' to="/myaccount">My account</Link>
 
-                <Link className=' nav-link' to="#" onClick={logout}>
+                <Link className=' nav-link' to="#" onClick={() => {
+                  setIsLogOut(true)
+                  setToken('');
+                  logout();
+                }}>
                   Logout
                 </Link>
-                
+
               </Nav> :
               <Nav className="align-items-center">
                 <Link className=' nav-link' to="/login">Log In</Link>
                 <Link eventKey={2} className=' nav-link' to="/register">
                   Register!
                 </Link>
-                
+
               </Nav>
           }
 

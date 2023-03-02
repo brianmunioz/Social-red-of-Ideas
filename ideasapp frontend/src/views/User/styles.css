@@ -8,6 +8,7 @@ body {
   width: 400px;
   margin: 16px auto;
   font-size: 16px;
+  box-shadow: 0 .5rem 1rem #784BA0!important;
 }
 @media screen and (max-width: 500px) {
   .login{
@@ -23,13 +24,6 @@ body {
 }
 
 /* The triangle form is achieved by a CSS hack */
-.login-triangle {
-  width: 0;
-  margin-right: auto;
-  margin-left: auto;
-  border: 12px solid transparent;
-  border-bottom-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
-}
 
 .login-header {
   padding: 20px;
@@ -38,6 +32,7 @@ body {
   text-align: center;
   text-transform: uppercase;
   color: #fff;
+  background-color: #784BA0;
 }
 
 .login-container {
@@ -66,8 +61,11 @@ body {
 .login input[type="email"],
 .login input[type="password"] {
   background: #fff;
-  border-color: #bbb;
+  border-color: #784BA0;
   color: #555;
+}
+.login input[type="submit"]{
+  background-color: #784BA0;
 }
 
 /* Text fields' focus effect */
