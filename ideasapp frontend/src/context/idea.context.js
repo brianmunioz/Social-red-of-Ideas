@@ -4,14 +4,33 @@ import axios from "axios";
 const IdeaContext = React.createContext();
 
 export function IdeaProvider(props) {
-  const {REACT_APP_API_URL} = process.env;
+  const { REACT_APP_API_URL } = process.env;
   const [ideas, setIdeas] = useState([]);
-  const [login,setLogin] = useState(false);
+  const [login, setLogin] = useState(false);
+
   let login_out;
-  function getIdeas() {
-    axios.get(REACT_APP_API_URL+'idea')
+  function getIdeas(page, size) {
+    if (!size) {
+      size = 5;
+    }
+    console.log('pagina: ' + page)
+
+    axios.get(REACT_APP_API_URL + 'idea/?pageSize=' + size + '&pageNum=' + page)
       .then(dat => {
-        setIdeas(dat.data);
+        if (page > 1) {
+          const dataIdeas = ideas;
+          if (dat.data.length === 0) {
+            return false;
+          }
+          else {
+            const newDataUpload = dataIdeas.concat(dat.data);
+            setIdeas(newDataUpload)
+            return true
+          }
+        } else {
+          setIdeas(dat.data);
+          return true
+        }
       })
       .catch(console.log)
   }

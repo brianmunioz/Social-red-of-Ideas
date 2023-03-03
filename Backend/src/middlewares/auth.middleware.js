@@ -18,13 +18,13 @@ module.exports = function (typeOperation) {
                 throw error;
             }
             req.user = decodedToken.user;
-            if (req.user.rol !== 'user') {
+            if (req.user.rol === 'user') {
                 if (typeOperation === 'comment_delete' || typeOperation === 'user_delete') {
                     const error = new Error();
                     error.message = "You not are admin!";
                     error.status = 401;
                     throw error;
-                }
+                }                
             }
             next();
         })

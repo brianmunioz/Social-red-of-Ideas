@@ -10,6 +10,7 @@ class BaseRepository {
         const skips = pageSize * (pageNum - 1);
         return await this.model
             .find()
+            .sort('-createdAt')
             .skip(skips)
             .limit(pageSize);
     }

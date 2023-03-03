@@ -5,7 +5,7 @@ import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import SectionBtn from '../alerts/btnAlerts/SectionBtn';
 import logout from '../../helpers/logout';
-const Idea = ({ data }) => {
+const Idea = ({ data,topIdea }) => {
   const token = document.cookie.replace('token=', '');
   const userLogged = JSON.parse(localStorage.getItem('user'));
 
@@ -32,7 +32,7 @@ const Idea = ({ data }) => {
   };
   let date = new Date(data.createdAt);
   let dateandHour = date.toLocaleString("es-ES");
- 
+ let colorTop;
 
 
   useEffect(() => {
@@ -170,6 +170,19 @@ const Idea = ({ data }) => {
       return 'downvote'
     }
   }
+  if(topIdea){
+    if(topIdea === 1){
+      colorTop = '#ffe085';
+    } else if(topIdea === 2){
+      colorTop = '#636464';
+    }
+    else if(topIdea === 3){
+      colorTop = '#7e7648';
+    }
+    else{
+      colorTop = 'black'
+    }
+  }
 
   return (
     <>
@@ -179,7 +192,7 @@ const Idea = ({ data }) => {
         text={'dark'}
         className=" mt-5 mx-auto col-12 col-sm-10 shadow"
       >
-        <Card.Header className='fw-bold'>{idea.title}</Card.Header>
+        <Card.Header className='fw-bold'><span className='float-start'>{idea.title}</span>{topIdea &&<span className='float-end' style={{color: colorTop}}>#{topIdea}</span>}</Card.Header>
         <Card.Body>
           <Card.Text>
             {idea.description}

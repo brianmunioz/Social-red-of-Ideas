@@ -7,11 +7,11 @@ module.exports = function ({ IdeaController }) {
 
     router.get("/:ideaID", IdeaController.get);
     router.get("",IdeaController.getAll);
-    router.get("/:userID/all",[AuthMiddleWare],IdeaController.getUserIdeas);
+    router.get("/:userID/all",[AuthMiddleWare('idea_getUserIdeas')],IdeaController.getUserIdeas);
 
-    router.post("",[AuthMiddleWare,cacheMiddleWare(CACHE_TIME.ONE_HOUR), parseIntMiddleWare], IdeaController.create);
-    router.patch("/:ideaID", [AuthMiddleWare],  IdeaController.update);
-    router.delete("/:ideaID",  [AuthMiddleWare], IdeaController.delete);
+    router.post("",[AuthMiddleWare('idea_post'),cacheMiddleWare(CACHE_TIME.ONE_HOUR), parseIntMiddleWare], IdeaController.create);
+    router.patch("/:ideaID", [AuthMiddleWare('idea_patch')],  IdeaController.update);
+    router.delete("/:ideaID",  [AuthMiddleWare('idea_delete')], IdeaController.delete);
 
 
 

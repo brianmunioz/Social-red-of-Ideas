@@ -21,8 +21,7 @@ const createDeleteForm = ({ mode }) => {
       axios.get(REACT_APP_API_URL + 'idea/' + ideaID)
         .then(dat => {
           if (dat.status !== 200 && dat.status !== 201) {
-            document.cookie = "token=; max-age=0";
-            localStorage.removeItem('user');
+            logout();
             return navigate('/');
           }
           setIdea(dat.data.idea);
@@ -73,13 +72,18 @@ const createDeleteForm = ({ mode }) => {
   const createIdea = (e) => {
     e.preventDefault();
     if (idea.trim() === '') {
+      console.log('ideaerror')
+
       setError('You need complete idea field!');
     } else if (description.trim() === '') {
+      console.log('descripcion')
+
       setError('You need complete description field!');
     } else {
+      console.log('entra aca')
       axios.post(REACT_APP_API_URL + 'idea', {
         idea: idea,
-        description: description,
+        description: description
       }, {
         headers: {
           'Authorization': token
@@ -92,7 +96,8 @@ const createDeleteForm = ({ mode }) => {
           }
         }
       )
-        .catch(res => {
+      .catch(res => {
+          console.log(res)
           if (res.response.status === 401) logout();
         })
     }
@@ -117,7 +122,7 @@ const createDeleteForm = ({ mode }) => {
           <Form.Control as="textarea" rows={15} name="description" value={description} onChange={(e) => setDescription(e.target.value)} />
         </Form.Group>
 
-        <Button variant="outline-dark" type="submit">
+        <Button variant="outline-dark" type="submit" >
           Submit
         </Button>
       </Form>

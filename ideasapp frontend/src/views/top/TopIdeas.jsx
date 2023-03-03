@@ -11,7 +11,7 @@ const TopIdeas = () => {
   } = useIdea();
 
   useEffect(() => {
-    getIdeas();
+    getIdeas(1,9000);
   }, [])
 
   const theMostVoted = ideas.filter(idea => { return idea.vote.length > 0 }).sort((a, b) => {
@@ -43,10 +43,10 @@ const TopIdeas = () => {
         theMostVoted.length > 0 &&
         theMostVoted.map((idea, index) =>
           <div >
-            <h2 className='top mt-5 btn btn-dark fw-bold text-uppercase ' >{`Position N°${index + 1}`}</h2>
             <a href={`/idea/${idea._id}`} key={idea._id} style={{ textDecoration: 'none' }}>
 
-              <Idea data={idea} key={idea._id} />
+
+              <Idea data={idea} topIdea={index + 1} key={idea._id} />
             </a>
           </div>
 
@@ -58,9 +58,8 @@ const TopIdeas = () => {
         theMostCommented.length > 0 &&
         theMostCommented.map((idea, index) =>
           <div >
-            <h2 className='top mt-5 btn btn-warning fw-bold text-uppercase ' >{`Position N°${index + 1}`}</h2>
             <a href={`/idea/${idea._id}`} key={idea._id} style={{ textDecoration: 'none' }}>
-              <Idea data={idea} key={idea._id} />
+              <Idea data={idea} topIdea={index + 1} key={idea._id} />
             </a>
           </div>
         )
