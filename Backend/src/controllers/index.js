@@ -4,6 +4,8 @@ module.exports = {
     CommentController: require('./comment.controller'),
     AuthController: require('./auth.controller'),
     VoteController: require('./vote.controller'),
-    SendFile: require('./uploadResponse.controller')
+    SendFile: require('./uploadResponse.controller'),
+    SuspendedUsersController: require('./suspendedUsers.controller'),
+    ReportedIdeasController: require('./reportedIdeas.controller')
 
 }

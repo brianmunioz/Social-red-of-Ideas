@@ -4,6 +4,8 @@ module.exports = {
     CommentRoutes: require('./comment.routes'),
     AuthRoutes: require('./auth.routes'),
     VoteRoutes: require('./vote.routes'),
-    UploadRoutes: require('./upload.routes')
+    UploadRoutes: require('./upload.routes'),
+    SuspendedUsersRoutes: require('./suspendedUsers.routes'),
+    ReportedIdeasRoutes: require('./reportedIdeas.routes')
 
 }

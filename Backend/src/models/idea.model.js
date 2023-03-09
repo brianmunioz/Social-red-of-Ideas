@@ -20,13 +20,21 @@ const IdeaSchema = new Schema({
         autopopulate: true
     },
     comments: [
-        { //este campo se relaciona con el autor del modelo user que alla realizado la idea
+        {
             type: Schema.Types.ObjectId,
             ref: "comment",
             required: true,
             autopopulate: true
         }
     ],
+    reports: [
+        { 
+            type: Schema.Types.ObjectId,
+            ref: "reportedIdeas",
+            required: true,
+            autopopulate: true
+        }
+    ]
     
    
 },{versionKey: false,

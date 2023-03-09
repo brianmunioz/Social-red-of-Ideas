@@ -19,12 +19,20 @@ module.exports = function (typeOperation) {
             }
             req.user = decodedToken.user;
             if (req.user.rol === 'user') {
-                if (typeOperation === 'comment_delete' || typeOperation === 'user_delete') {
+                if (typeOperation === 'comment_delete' || typeOperation === 'user_delete' || typeOperation === 'suspendedUsers' ||
+                    typeOperation === 'reportedIdeas') {
                     const error = new Error();
-                    error.message = "You not are admin!";
+                    error.message = "You cannot access to this actions!";
                     error.status = 401;
                     throw error;
-                }                
+                }
+            } else if (req.user.rol === 'moderator') {
+                if (typeOperation === 'comment_delete' || typeOperation === 'user_delete' || typeOperation === 'suspendedUsers') {
+                    const error = new Error();
+                    error.message = "You cannot access to this actions!";
+                    error.status = 401;
+                    throw error;
+                }
             }
             next();
         })

@@ -72,15 +72,12 @@ const createDeleteForm = ({ mode }) => {
   const createIdea = (e) => {
     e.preventDefault();
     if (idea.trim() === '') {
-      console.log('ideaerror')
 
       setError('You need complete idea field!');
     } else if (description.trim() === '') {
-      console.log('descripcion')
 
       setError('You need complete description field!');
     } else {
-      console.log('entra aca')
       axios.post(REACT_APP_API_URL + 'idea', {
         idea: idea,
         description: description
@@ -90,7 +87,6 @@ const createDeleteForm = ({ mode }) => {
         }
       }).then(
         (dat) => {
-          console.log(dat)
           if (dat.status === 200 && dat.status === 201) {
             setSuccess('Idea created! ');
           }

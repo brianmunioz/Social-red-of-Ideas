@@ -6,7 +6,21 @@ const UserSchema = new Schema({
     username: { type: String, required: true },
     password: { type: String, required: true },
     img_profile: {type: String},
-    rol: {type: String, default: 'user', required: true}
+    rol: {type: String, default: 'user', required: true},
+    reports:[ { 
+        type: Schema.Types.ObjectId,
+        ref: "reportedIdeas",
+        required: true,
+        autopopulate: true
+    }],
+    suspentions: [
+        { 
+            type: Schema.Types.ObjectId,
+            ref: "suspendedUsers",
+            required: true,
+            autopopulate: true
+        }
+    ]
 },{versionKey: false,
     timestamps: true});
 UserSchema.methods.toJSON = function () {

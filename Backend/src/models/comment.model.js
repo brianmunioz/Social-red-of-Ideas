@@ -12,8 +12,7 @@ const CommentSchema = new Schema({
 });
 
 
-//configuracion de plugins de mongoose autopoulate
-//Esto sirve para que te traiga la info de los datos relacionados
+
 
 CommentSchema.plugin(require('mongoose-autopopulate'));
 
