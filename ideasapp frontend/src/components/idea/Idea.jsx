@@ -114,6 +114,7 @@ const Idea = ({ data,topIdea }) => {
           setTotalVotes(totalVotes - 1);
         })
         .catch(res => {
+          console.log(res)
           if (res.response.status === 401) logout();
         })
     } else if (voted === false) {
@@ -128,6 +129,7 @@ const Idea = ({ data,topIdea }) => {
           setVoted(true);
         })
         .catch(res => {
+          console.log(res)
           if (res.response.status === 401) logout();
         })
     } else {
@@ -145,6 +147,7 @@ const Idea = ({ data,topIdea }) => {
           setTotalVotes(totalVotes + 1);
         })
         .catch(res => {
+          console.log(res)
           if (res.response.status === 401) logout();
         })
     }

@@ -19,13 +19,13 @@ class ReportedIdeasController {
 
     async get(req, res) {
         const { reportedID } = req.params;
-        const user = await _reportedUserService.get(reportedID);
+        const user = await _reportedIdeasService.get(reportedID);
         return res.send(user);
     }
 
     async getAll(req, res) {
         const { pageSize, pageNum } = req.query;
-        const reports = await _reportedUserService.getAll(pageSize, pageNum);
+        const reports = await _reportedIdeasService.getAll(pageSize, pageNum);
         return res.send(reports);
     }
 
@@ -34,7 +34,7 @@ class ReportedIdeasController {
         const { reportedID } = req.params;
         const { id } = req.user;
 
-        const deletedReport = await _reportedUserService.delete(reportedID, id);
+        const deletedReport = await _reportedIdeasService.delete(reportedID, id);
         return res.send(deletedReport);
     }
 }

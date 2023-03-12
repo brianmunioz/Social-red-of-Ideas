@@ -13,7 +13,6 @@ export function IdeaProvider(props) {
     if (!size) {
       size = 5;
     }
-    console.log('pagina: ' + page)
 
     axios.get(REACT_APP_API_URL + 'idea/?pageSize=' + size + '&pageNum=' + page)
       .then(dat => {

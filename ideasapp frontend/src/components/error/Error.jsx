@@ -23,7 +23,7 @@ function Error(props) {
         <Modal.Header closeButton>
           <Modal.Title>{props.error}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{props.descripcion}</Modal.Body>
+        <Modal.Body>{props.description}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close

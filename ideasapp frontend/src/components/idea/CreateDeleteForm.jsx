@@ -3,6 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Form, Button, Alert } from 'react-bootstrap';
 import axios from 'axios';
 import logout from '../../helpers/logout';
+import inputTextValidation from '../../helpers/inputTextValidation';
+import CreatedAlert from '../alerts/CreatedAlert';
+
 
 const createDeleteForm = ({ mode }) => {
   const navigate = useNavigate();
@@ -11,7 +14,7 @@ const createDeleteForm = ({ mode }) => {
   const [dateCreated, setDateCreated] = useState('');
   const [dateUpdated, setDateUpdated] = useState('')
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [show, setShow] = useState(false);
   let { ideaID } = useParams();
   const token = document.cookie.replace('token=', '');
   const { REACT_APP_API_URL } = process.env;
@@ -39,10 +42,20 @@ const createDeleteForm = ({ mode }) => {
 
   const edit = (e) => {
     e.preventDefault();
-    if (idea.trim() === '') {
-      setError('You need a complete idea field!');
-    } else if (description.trim() === '') {
-      setError('You need a complete description field!');
+    const validIdea = inputTextValidation(idea, 'idea');
+    const validDescription = inputTextValidation(description, 'description');
+    if (validIdea.validation === false) {
+      setError(validIdea.error);
+      setTimeout(()=>{
+        setError('');
+      },3000)
+      return
+    } else if (validDescription.validation === false) {
+      setError(validDescription.error);
+      setTimeout(()=>{
+        setError('');
+      },3000)
+      return
     } else {
       axios.patch(REACT_APP_API_URL + 'idea/' + ideaID, {
         idea: idea,
@@ -56,12 +69,23 @@ const createDeleteForm = ({ mode }) => {
         }
       })
         .then(dat => {
-          if (dat.status === 200 && dat.status === 201) {
-            setSuccess('updated successfully! ')
+          console.log(dat)
+          if (dat.status === 200 || dat.status === 201) {
+            setShow(true);
+            setTimeout(()=>{
+              navigate('/myideas')
+            },3000)
 
           }
         })
         .catch(res => {
+          console.log(res)
+          if(res.response.status === 400){
+            setError(res.response.data.message);
+      setTimeout(()=>{
+        setError('');
+      },3000)
+          }
           if (res.response.status === 401) logout();
         })
 
@@ -71,13 +95,21 @@ const createDeleteForm = ({ mode }) => {
   }
   const createIdea = (e) => {
     e.preventDefault();
-    if (idea.trim() === '') {
-
-      setError('You need complete idea field!');
-    } else if (description.trim() === '') {
-
-      setError('You need complete description field!');
-    } else {
+    const validIdea = inputTextValidation(idea, 'idea');
+    const validDescription = inputTextValidation(description, 'description');
+    if (validIdea.validation === false) {
+      setError(validIdea.error);
+      setTimeout(()=>{
+        setError('');
+      },3000)
+      return
+    } else if (validDescription.validation === false) {
+      setError(validDescription.error);
+      setTimeout(()=>{
+        setError('');
+      },3000)
+      return
+    } else  {
       axios.post(REACT_APP_API_URL + 'idea', {
         idea: idea,
         description: description
@@ -87,13 +119,16 @@ const createDeleteForm = ({ mode }) => {
         }
       }).then(
         (dat) => {
-          if (dat.status === 200 && dat.status === 201) {
-            setSuccess('Idea created! ');
+          if (dat.status === 200 || dat.status === 201 ) {
+            setShow(true);
+            setTimeout(()=>{
+              navigate('/myideas')
+            },3000)
           }
         }
       )
       .catch(res => {
-          console.log(res)
+        console.log(res)
           if (res.response.status === 401) logout();
         })
     }
@@ -101,20 +136,21 @@ const createDeleteForm = ({ mode }) => {
 
   return (
     <div className="container mt-5">
-      <h1>{ideaID ? ('Edit idea') : ('Create new idea')}</h1>
+            {show && <CreatedAlert show={show} title={'Your idea is '+mode+'! We redirected to your ideas'} />}
+
+      <h1 className='title'>{ideaID ? ('Edit idea') : ('Create new idea')}</h1>
       <Form onSubmit={ideaID ? (edit) : (createIdea)}>
-        {error && success === '' && <Alert className='mt-3' variant='danger'> {error}</Alert>}
-        {!error && success !== '' && <Alert className='mt-3' variant='success'> {success}</Alert>}
+        {error  && <Alert className='mt-3' variant='danger'> {error}</Alert>}
 
 
         <Form.Group className="mb-3" >
-          <Form.Label>Title with idea</Form.Label>
+          <Form.Label className='fw-bold'>Title with idea</Form.Label>
           <Form.Control type="text" name="idea" value={idea} onChange={(e) => setIdea(e.target.value)} />
 
         </Form.Group>
 
         <Form.Group className="mb-3" >
-          <Form.Label>Idea description</Form.Label>
+          <Form.Label className='fw-bold'>Idea description</Form.Label>
           <Form.Control as="textarea" rows={15} name="description" value={description} onChange={(e) => setDescription(e.target.value)} />
         </Form.Group>
 

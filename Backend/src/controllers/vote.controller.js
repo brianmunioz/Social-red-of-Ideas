@@ -12,6 +12,7 @@ class VoteController {
 
     async update(req, res) {
         const { body } = req;
+        body.typeUpdate = 'vote'
         const { voteID } = req.params;
         const updatedVote = await _voteService.update(voteID, body);
         return res.send(updatedVote);
@@ -19,10 +20,9 @@ class VoteController {
 
     async delete(req, res) {
         const {id} = req.user;
-        console.log(id);
-
+        
         const { voteID } = req.params;
-        const deletedVote = await _voteService.delete(voteID,id);
+        const deletedVote = await _voteService.delete(voteID,id,'vote');
         return res.send(deletedVote);
     }
 

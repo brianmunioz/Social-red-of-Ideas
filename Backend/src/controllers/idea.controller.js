@@ -39,7 +39,7 @@ class IdeaController {
     async delete(req, res) {
         const {id} = req.user;
         const { ideaID } = req.params;
-        const deletedIdea = await _ideaService.delete(ideaID,id);
+        const deletedIdea = await _ideaService.delete(ideaID,id,'idea');
         return res.send(deletedIdea);
     }
 

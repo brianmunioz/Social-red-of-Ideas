@@ -8,9 +8,14 @@ export default () =>
     <Home></Home>
   </IdeaProvider>
 const Home = () => {
+  const [initialLoading, setInitialLoading] = useState(true);
+  setTimeout(()=>{
+      setInitialLoading(false);
+          },500)
   const [page, setPage] = useState(2);
   const [newIdeas, setNewIdeas] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  
 
 
   const { getIdeas,
@@ -26,7 +31,10 @@ const updateIdeas = ()=>{
 }
   return (
     <div className='container  pb-5'>
-      <h1 className='text-center title  text-uppercase mt-5'>Latest <span></span> Ideas</h1>
+      {
+        initialLoading === false ? 
+        <>
+         <h1 className='text-center title  text-uppercase mt-5'>Latest <span></span> Ideas</h1>
       {
         ideas.length > 0  &&
         ideas.map((idea) => <Idea data={idea} key={idea._id} />)
@@ -67,6 +75,12 @@ const updateIdeas = ()=>{
 
 }
         
+        </> 
+        :
+        <Loading/>
+
+      }
+     
 
    
 

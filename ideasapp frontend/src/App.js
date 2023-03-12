@@ -14,6 +14,9 @@ import MyAccount from './views/User/MyAccount';
 import Config from './views/User/Config';
 import UserProfile from './views/userProfile/userProfile';
 import Searcher from './components/searcher/Searcher';
+import AdminModerator from './views/User/AdminModerator';
+import CreateReport from './views/User/CreateReport';
+import CreateSuspention from './views/User/CreateSuspention';
 function App() {
   return (
     <div className="App background pb-5" style={{ height: "100%" }}>
@@ -28,10 +31,18 @@ function App() {
         <Route path="/myaccount/config" element={<Config />}></Route>
         <Route path="/edit/:ideaID" element={<CreateDeleteForm  mode="edit"  />}></Route>
         <Route path="/create" element={<CreateDeleteForm mode='create' />}></Route>
+        <Route path="/create/report" element={<CreateReport />}></Route>
+
         <Route path="/top" element={<TopIdeas />}></Route>
         <Route path="/profileUser" element={<UserProfile/>}></Route>
         <Route path="/profileUser/:userID" element={<UserProfile/>}></Route>
         <Route path="/search" element={<Searcher/>}></Route>
+        <Route path="/suspended" element={<AdminModerator type="suspended"/>}></Route>
+        <Route path="/reported" element={<AdminModerator type="reported"/>}></Route>
+        <Route path="/create/suspention/:userID" element={<CreateSuspention />}></Route>
+
+
+
 
 
         <Route  path='*' element={<NotFound />} />

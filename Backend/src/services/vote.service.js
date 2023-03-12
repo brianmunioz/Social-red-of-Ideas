@@ -15,7 +15,7 @@ class VoteService extends BaseService {
         if (!ideaID) {
             const error = new error();
             error.status = 400;
-            error.message = "ideaID debe enviarse";
+            error.message = "ideaID must be sent";
             throw error;
         }
         const idea = await _ideaRepository.get(ideaID);
@@ -23,7 +23,7 @@ class VoteService extends BaseService {
         if (!idea) {
             const error = new error();
             error.status = 400;
-            error.message = "UserID debe enviarse";
+            error.message = "UserID must be sent";
             throw error;
         }
 
@@ -32,7 +32,6 @@ class VoteService extends BaseService {
     }
 
     async createVote(vote, ideaId, userId) {
-      console.log(userId);
         if (!ideaId) {
           const error = new Error();
           error.status = 400;

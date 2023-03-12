@@ -40,33 +40,39 @@ class BaseService {
             error.message = 'You need to send type of update!';
             throw error;
         }
-        const doUpdated = latestDate(new Date(entity.dateUpdated).getTime(), entity.typeUpdate)
+        if(entity.typeUpdate !== 'vote'){
+            const doUpdated = latestDate(new Date(entity.dateUpdated).getTime(), entity.typeUpdate)
 
-        if (!doUpdated) {
-            const error = new Error();
-            error.status = 400;
-            error.message = 'You not do updated!';
-            throw error;
+            if (!doUpdated) {
+                const error = new Error();
+                error.status = 400;
+                error.message = 'You not do because you need wait it takes 7 days to update';
+                throw error;
+            }
         }
+       
 
 
         return await this.repository.update(id, entity);
 
     }
-    async delete(idParam, idUser) {
+    async delete(idParam, idUser,type) {
         if (!idParam) {
             const error = new Error();
             error.status = 400;
             error.message = 'Id not valid!';
             throw error;
         }
-
-        if (idParam !== idUser) {
-            const error = new Error();
-            error.status = 400;
-            error.message = 'You are not authorized to delete';
-            throw error;
+        if(!type){
+            
+            if (idParam !== idUser) {
+                const error = new Error();
+                error.status = 400;
+                error.message = 'You are not authorized to delete';
+                throw error;
+            }
         }
+        
 
 
         return await this.repository.delete(idParam);
