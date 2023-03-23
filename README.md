@@ -1,4 +1,4 @@
-# Social red of Ideas
+# Red social de ideas
 Proyecto realizado con React.js, Bootstrap, Node.js, MongoDB.
 
 -Patrón repositorio y n capas
