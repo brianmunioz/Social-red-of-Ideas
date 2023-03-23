@@ -1,5 +1,5 @@
 # Social red of Ideas
-This project develop with React.js, Bootstrap, Node.js, MongoDB.
+Projecto realizado con React.js, Bootstrap, Node.js, MongoDB.
 
 -Patrón repositorio y n capas
 
