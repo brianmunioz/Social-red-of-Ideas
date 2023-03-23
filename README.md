@@ -2,9 +2,13 @@
 This project develop with React.js, Bootstrap, Node.js, MongoDB.
 
 -Patrón repositorio y n capas
+
 -CRUD
+
 -API RESTFUL
+
 -Autenticación JWT
+
 
 
 
