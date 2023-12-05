@@ -1,13 +1,12 @@
 # Red social de ideas
 Proyecto realizado con React.js, Bootstrap, Node.js, MongoDB.
 
--Patrón repositorio y n capas
-
--CRUD
-
--API RESTFUL
-
--Autenticación JWT
+- Patrón repositorio y n capas
+- Inyección de dependencias
+- Singleton
+- API RESTFUL
+- Autenticación JWT
+- Principios SOLID
 
 
 
